@@ -1,0 +1,145 @@
+* {
+  font-family: Courier;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.footer {
+  border-top: 1px solid #333;
+}
+
+.tag-container {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.news-box {
+  border: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  word-wrap: break-word;
+  display: flex;
+  border: 1px solid #666;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 4rem;
+  max-width: 80%;
+}
+
+p {
+  color: #444;
+}
+
+a {
+  margin: .2rem 0;
+  box-sizing: border-box;
+  padding: 1rem;
+  color: #444;
+  border-radius: .1rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: border .2s ease-in;
+}
+
+input[type='text'] {
+  padding: .2rem .4rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 1px solid #333;
+}
+
+input[type='text']:focus {
+  outline: none;
+}
+
+.active {
+  background-color: #6cc4ee;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.margins {
+  margin: 1rem;
+}
+
+#form_tag {
+  display: none;
+}
+
+button {
+  background-color: transparent;
+  border: 1px solid #333;
+  transition: background-color .2s ease-in;
+  padding: .5rem 1rem;
+  margin: .2rem;
+  font-size: 1rem;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(0,0,0,.1);
+}
+
+button:focus {
+  outline: none;
+}
+
+a:focus {
+  background-color: rgb(0, 0, 0, .2)
+}
+
+.sub-flex-box {
+  background-color: blue;
+  width: 100%;
+  margin-bottom: auto;
+  border-top: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a:hover {
+  border: 1px solid #444;
+}
+
+.inline-block {
+  display: inline;
+}
+
+.margin-right {
+  margin-right: .5rem;
+}
+
+.title {
+  font-size: 1.2rem;
+}
+
+.hr {
+  height: 1px;
+  background-color: #444;
+  width: 100%;
+}

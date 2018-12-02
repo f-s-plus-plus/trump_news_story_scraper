@@ -1,0 +1,27 @@
+extends template.pug
+
+block content 
+  container
+    main
+      p(class="title") #{title}
+      p Tags
+      div(class="tag-container")
+        button(id="button1") Politics
+        button(id="button2") New York
+        button(id="button3") Letters
+        button(id="button4") Opinion
+        button(id="button5") Books
+      form(method="post")
+        input(id="form_tag", type="text", name="form_tag")
+        button(type="submit") Submit  
+      for article in articles
+        div(class="news-box")
+          p= article.tag
+          p(class='margins')= article.title
+          - var link = article.link
+          div(class="sub-flex-box")
+          a(href=link class="block")
+            i(class="fas fa-link margin-right")
+            p(class="inline-block") Link to Article
+      script 
+        include ../public/js/tags.js
