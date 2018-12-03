@@ -10,8 +10,6 @@
   "author": "mithridates",
   "license": "MIT",
   "dependencies": {
-    "@tensorflow/tfjs": "^0.14.0",
-    "amazon-scraper": "0.0.4",
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4",

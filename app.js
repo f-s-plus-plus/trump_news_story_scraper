@@ -24,31 +24,35 @@ mongoose.connect("mongodb://admin:password1@ds123444.mlab.com:23444/hackathon", 
 //------------------------------- Scrapper -------------------------------
 const data = [{
   method: 'GET',
-  url: 'https://www.nytimes.com/search?query=trump'
+    url: 'https://www.nytimes.com/search?query=trump'
 }];
 
-let articleInfo = { NYT : []}
 
+//scrapes the search query for trump
 request(data[0], (err, res, body) => {
   let $ = cheerio.load(body);
-  let i = 10;
+  //the seventh anchor is the first one used by the NYTs for news articles
+  let i = 7;
   let flag = true;
   while(flag) {
     let link = "https://www.nytimes.com";
+    //gets the title of the article
     let title = $("a").eq(i).children('h4').text().trim();
+    //checks to see if the anchor is an anchor for an article
     if(title === "" || title === "Have search feedback? Let us know what you think.") {
       flag = false
     }
     else {
+      //gets the anchor tag link
       link += $("a").eq(i).attr('href').trim();
+      //gets the tag of the article
       let tag = $("a").eq(i).prev().text().trim();
       let individualArticle = {title : title, link : link, tag : tag};
-      articleInfo.NYT.push(individualArticle);
+      //checks to see if the article already exists; if it doesn't, it makes a new article and saves it
       Article.findOne({title : title}, (error, article) => {
         if(error) {
           res.send(error);
         }
-        console.log(article)
         if(article == null) {
           const article = new Article({
             title : title,
@@ -60,7 +64,6 @@ request(data[0], (err, res, body) => {
             if(error) {
               res.send(error)
             }
-            console.log("Succesful!");
           });
         }
       });
@@ -97,15 +100,14 @@ app.get('/:publication', (req, res, next) => {
 }
 });
 
+//for using tags (e.g. politics)
 app.post('/:publication', (req, res) => {
   for(var i = 0; i < publications.length; i++) {
     if(publications[i].id === req.params.publication.toUpperCase()) {
     Article.find({publication : req.params.publication.toUpperCase(), tag : req.body.form_tag }, (error, articles) => {
-      console.log(req.body.form_tag);
       if(error) {
         console.log(error)
       }
-      console.log(articles);
       if(articles != null) {
         res.render('news', {title : "New York Times", articles : articles});
       }
