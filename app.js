@@ -15,18 +15,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
 
-//connects to mlab database
-mongoose.connect("mongodb://admin:password1@ds123444.mlab.com:23444/hackathon", {useNewUrlParser: true}).then(() =>
-{
+//connects to mongodb database on mlab
+mongoose.connect("mongodb://admin:password1@ds123444.mlab.com:23444/hackathon", {useNewUrlParser: true}).then(() => {
   console.log("Hackathon database has been connected to!");
 });
 
-//------------------------------- Scrapper -------------------------------
+//------------------------------- Scraper -------------------------------
+
 const data = [{
   method: 'GET',
     url: 'https://www.nytimes.com/search?query=trump'
 }];
-
 
 //scrapes the search query for trump
 request(data[0], (err, res, body) => {
@@ -86,34 +85,33 @@ app.get('/', (req, res) => {
 app.get('/:publication', (req, res, next) => {
   for(var i = 0; i < publications.length; i++) {
     if(publications[i].id === req.params.publication.toUpperCase()) {
-    Article.find({publication : req.params.publication.toUpperCase()}, (error, articles) => {
-      if(error) {
-        console.log(error)
-      }
-      console.log(articles);
-      if(articles != null) {
-        res.render('news', {title : "New York Times", articles : articles});
-      }
-      next();
-    });
+      Article.find({publication : req.params.publication.toUpperCase()}, (error, articles) => {
+        if(error) {
+          console.log(error)
+        }
+        if(articles != null) {
+          res.render('news', {title : "New York Times", articles : articles});
+        }
+        next();
+      });
+    }
   }
-}
 });
 
 //for using tags (e.g. politics)
 app.post('/:publication', (req, res) => {
   for(var i = 0; i < publications.length; i++) {
     if(publications[i].id === req.params.publication.toUpperCase()) {
-    Article.find({publication : req.params.publication.toUpperCase(), tag : req.body.form_tag }, (error, articles) => {
-      if(error) {
-        console.log(error)
-      }
-      if(articles != null) {
-        res.render('news', {title : "New York Times", articles : articles});
-      }
-    });
+      Article.find({publication : req.params.publication.toUpperCase(), tag : req.body.form_tag }, (error, articles) => {
+        if(error) {
+          console.log(error)
+        }
+        if(articles != null) {
+          res.render('news', {title : "New York Times", articles : articles});
+        }
+      });
+    }
   }
-}
 });
 
 //fires if the user enters an incorrect url
