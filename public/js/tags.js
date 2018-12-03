@@ -1,7 +1,7 @@
 //array of tag buttons
 let btnArray = ['button1', 'button2','button3','button4','button5','button6'];
 //array of tags (note that the two arrays have the same length)
-let tagsArray = ["Politics", "New York", "Letters", "Opinion", "Book"];
+let tagsArray = ["Politics", "New York", "Letters", "Opinion", "Books"];
 
 //iterates over the buttons and attaches an event listener to check if they are clicked
 for(let i = 0; i < btnArray.length; i++) {
